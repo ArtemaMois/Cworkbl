@@ -24,9 +24,10 @@ Route::controller(NotesController::class)->group(function () {
     Route::get('/important', 'importantNotes')->name('note.imortant');
     Route::get('/deleted', 'deletedNotes')->name('note.deleted');
     Route::get('/{note}', 'edit')->name('note.edit');
-    Route::post('/', 'store')->name('note.store');
+    Route::post('/store', 'store')->name('note.store');
     Route::patch('/{note}', 'update')->name('note.update');
-    Route::patch('/{note}', 'restoreNote')->name('note.restore');
+    Route::patch('/restore/{note}', 'restoreNote')->name('note.restore');
     Route::delete('/{note}', 'softDestroy')->name('note.softdestroy');
     Route::delete('/deleted/{note}', 'forceDelete')->name('note.forcedelete');
+    Route::post('/notes/search', 'searchNote')->name('note.search');
 });

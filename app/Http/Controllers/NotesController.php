@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchNoteRequest;
 use Illuminate\Http\Request;
 use App\Models\Note;
 use App\Http\Requests\StoreNoteRequest;
@@ -12,8 +13,10 @@ class NotesController extends Controller
 {
     public function index()
     {
-        $notes = MinifiedNoteResource::collection(Note::all());
-        return view('layots.notes', ['notes' => $notes]);
+        $notes = Note::query()->orderBy('updated_at', 'desc')->get()->toArray();
+        // $note = new MinifiedNoteResource(Note::query()->find(5));
+        // dd($note);
+        return view('layots.notes', ['notes' => MinifiedNoteResource::collection($notes)]);
     }
 
     public function create()
@@ -29,11 +32,18 @@ class NotesController extends Controller
         } else {
             $title = $request->input('title');
         }
+        if($request->is_important == "1"){
+            $is_important = 1;
+
+        }else{
+            $is_important = 0;
+        }
         Note::query()->create([
             'title' => $title,
             'body' => $request->input('body'),
+            'is_important' => $is_important
         ]);
-        return redirect()->route('notes.index');
+        return redirect()->route('note.index');
     }
 
     public function edit(Note $note)
@@ -52,18 +62,19 @@ class NotesController extends Controller
         }
         $note->update($data);
         // dd($data);
-        return redirect()->route('notes.index');
+        return redirect()->route('note.index');
     }
 
     public function softDestroy(Note $note)
     {
         $note->delete();
-        return redirect()->route('notes.index');
+        return redirect()->route('note.index');
     }
 
-    public function forceDelete(Note $noteid)
+    public function forceDelete(int $note)
     {
-        dd($noteid);
+        $deletedNote = Note::onlyTrashed()->find($note);
+        $deletedNote->forceDelete();
         return redirect()->route('note.deleted');
     }
     public function changeImportance(Note $note)
@@ -88,12 +99,19 @@ class NotesController extends Controller
     public function deletedNotes()
     {
         $notes = Note::onlyTrashed()->get();
-        return view('layots.deleted', ['notes' => $notes]);
+        return view('layots.deleted', ['notes' => MinifiedNoteResource::collection($notes)]);
     }
 
-    public function restoreNote(Note $note)
+    public function restoreNote(int $noteId)
     {
-        $note->restore();
+        $note = Note::withTrashed()->find($noteId)->restore();
         return redirect()->back();
+    }
+
+    public function searchNote(SearchNoteRequest $request)
+    {
+        $title = $request->title;
+        $notes = Note::query()->where('title', 'LIKE', "%{$title}%")->orderBy('updated_at', 'desc')->get();
+        return view('layots.notes', ['notes' => $notes]);
     }
 }

@@ -16,8 +16,7 @@ class MinifiedNoteResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'body' => $this->body,
-            'created_at' => Carbon::parse($this->created_at)->format('d:m Y:i'),
-            'updated_at' => Carbon::parse($this->updated_at)->format('d:m Y:i')
+            'updated_at' => $this->updated_at->format('d.m H:i'),
         ];
     }
 }

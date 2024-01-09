@@ -1,6 +1,5 @@
 <div class="note">
     <div class="note__container">
-        <a href="{{ route('note.edit', ['note' => $note]) }}">
             <div class="note__content">
                 <div class="note__button-text">
                     <div class="note__text">
@@ -19,10 +18,9 @@
                         </form>
                     </div>
                 </div>
-                <div class="note__date">{{ $note->updated_at }}</div>
+                <div class="note__date">{{ $note['updated_at'] }}</div>
             </div>
-        </a>
-    </div>
+        </div>
     <div class="note__restore">
         <form action="{{ route('note.restore', ['note' => $note]) }}" method="post">
             @method('PATCH')

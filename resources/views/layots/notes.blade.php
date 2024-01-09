@@ -15,6 +15,16 @@
                 </div>
             </div>
         </div>
+        <form action="{{ route('note.search') }}" class="notes__search" method="POST">
+            @csrf
+            <input type="text" class="notes__search-input" name="title" placeholder="Введите заголовок...">
+            <button type="submit" class="notes__search-btn"><img src="{{ asset('images/free-icon-search-4024513.png') }}" alt=""></button>
+            <div class="invalid-message">
+                @error('title')
+                {{ $message }}
+                @enderror
+            </div>
+        </form>
         @foreach ($notes as $note)
             @include('layots.note', ['note' => $note])
         @endforeach

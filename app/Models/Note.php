@@ -20,7 +20,8 @@ class Note extends Model
 
     protected $casts = [
         'body' => 'string',
-        'is_important' => 'boolean'
+        'is_important' => 'boolean',
+        'updated_at' => 'datetime:d.m H:i'
     ];
 
     protected function title()

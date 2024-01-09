@@ -10,7 +10,7 @@ class UpdateNoteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['string', 'max:10'],
+            'title' => ['string'],
             'body' => ['string', 'min:2', 'max:300'],
             'is_important' => []
         ];

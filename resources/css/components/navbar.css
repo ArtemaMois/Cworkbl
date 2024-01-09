@@ -1,13 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Karla:wght@500;600&family=Poppins:wght@600&family=Quicksand:wght@500&family=Roboto:ital@1&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@500;600&family=M+PLUS+Rounded+1c:wght@500&family=Manrope:wght@600&family=PT+Sans+Caption&family=Pacifico&family=Poppins:wght@600&family=Quicksand:wght@500&family=Roboto+Mono:wght@500;600&family=Roboto+Slab:wght@500&family=Roboto:ital@1&family=Rubik:wght@500&display=swap');
 .navbar{
     width: 100%;
     height: 80px;
     display:flex;
     justify-content: center;
     align-items: center;
-    background: rgb(255,146,57);
-    background: linear-gradient(90deg, rgba(255,146,57,1) 32%, rgba(255,197,142,1) 75%);
+    background: rgb(137,31,242);
+    background: linear-gradient(90deg, rgba(137,31,242,0.9248949579831933) 76%, rgba(154,30,255,0.9192927170868347) 93%);
     grid-area: header;
     border-bottom: 1.5px solid rgb(214, 214, 214);
 }
@@ -18,11 +17,10 @@
 }
 
 .navbar__header{
-    width: 13%;
+    width: 14%;
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     /* padding-right: 10px; */
     /* border: 1px solid red; */
 }
@@ -59,10 +57,12 @@
 }
 
 .navbar__title{
+    margin: 0 0 1vh 0.5vh;
     width: 70%;
     height: 90%;
     text-align: center;
-    font-family: 'Alegreya', sans-serif;
+    font-family: 'Pacifico', cursive;
+    font-weight: 600;
     font-size: 32px;
     color: rgb(0, 0, 0);
 }

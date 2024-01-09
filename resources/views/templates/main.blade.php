@@ -8,7 +8,7 @@
     <title>Notes</title>
     @vite(['/resources/css/main.css',
     '/resources/css/layots/create.css',
-    '/resources/css/layots/update.css' ])
+    '/resources/css/layots/update.css'])
 </head>
 <body>
     <main>
